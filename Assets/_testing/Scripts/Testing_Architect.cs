@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 namespace TESTING
@@ -9,6 +10,8 @@ namespace TESTING
     {
         DialogueSystem ds;
         TextArchitect architect;
+
+        public TextArchitect.BuildMethod bm = TextArchitect.BuildMethod.instant;
 
         string[] lines = new string[6]
         {
@@ -26,7 +29,7 @@ namespace TESTING
         {
             ds = DialogueSystem.instance;
             architect = new TextArchitect(ds.dialogueContainer.dialogueText);
-            architect.buildMethod = TextArchitect.BuildMethod.typewriter;
+            architect.buildMethod = TextArchitect.BuildMethod.fade;
             architect.speed = 0.5f;
 
         }
@@ -34,6 +37,15 @@ namespace TESTING
         // Update is called once per frame
         void Update()
         {
+            if (bm != architect.buildMethod)
+            {
+                architect.buildMethod = bm;
+                architect.Stop();
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            architect.Stop();
+            
             string longLine = "wow this is the longest line ever in history, wow, it just keeps going and going, I am not sure where I end or begin. When You loose someone, where does the loss go, can you ever find them again? I am curious about that. ";
             if (Input.GetKeyDown(KeyCode.Space))
             {
