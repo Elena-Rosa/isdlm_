@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class FileManager
@@ -32,8 +34,29 @@ public class FileManager
 
      public static List<string> ReadTextAsset(string filePath, bool includeBlankLines = true)
     {
-        return null;
-    }
+        TextAsset asset = Resources.Load<TextAsset>(filePath);
+        if (asset == null)
+        {
+            Debug.LogError($"Asset not found: '{filePath}'");
+            return null;
+        }
+        return ReadTextAsset(asset, includeBlankLines);
+    }   
 
+    public static List<string> ReadTextAsset(TextAsset asset, bool includeBlankLines = true)
+    {
+        List<string> lines = new List<string>();
+        using (StringReader sr = new StringReader(asset.text))
+        {
+            while (sr.Peek() > -1)
+            {
+                string line = sr.ReadLine();
+                if (includeBlankLines || !string.IsNullOrWhiteSpace(line))
+                    lines.Add(line);
+            }
+        }
+       return lines;
+
+    }
 
 }
