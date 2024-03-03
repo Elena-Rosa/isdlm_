@@ -13,13 +13,13 @@ namespace DIALOGUE
         public static DialogueSystem instance;
         private bool isRunningConversation => conversationManager.isRunning;
 
-    private void Awake()
+        private void Awake()
         {
             if (instance == null)
                 instance = this;
             else
                 DestroyImmediate(gameObject);
-            }
+        }
         public void Say(string speaker, string dialogue)
         {
             List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\"" };
