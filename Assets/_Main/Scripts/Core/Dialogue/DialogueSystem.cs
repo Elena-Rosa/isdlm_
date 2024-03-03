@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 namespace DIALOGUE
 {
@@ -9,27 +8,26 @@ namespace DIALOGUE
     public class DialogueSystem : MonoBehaviour
     {
         public DialogueContainer dialogueContainer = new DialogueContainer();
+        private ConversationManager conversationManager = new ConversationManager();
 
         public static DialogueSystem instance;
+        private bool isRunningConversation => conversationManager.isRunning;
 
     private void Awake()
         {
             if (instance == null)
                 instance = this;
             else
-            {
                 DestroyImmediate(gameObject);
             }
-        }
-        void Start()
+        public void Say(string speaker, string dialogue)
         {
-
+            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\"" };
+            Say(conversation);
         }
-
-        // Update is called once per frame
-        void Update()
+        public void Say(List<string> conversation)
         {
-
+            conversationManager.StartConversation(conversation);
         }
     }
 }
