@@ -12,7 +12,7 @@ namespace TESTING
         DialogueSystem ds;
         TextArchitect architect;
 
-        public TextArchitect.BuildMethod bm = TextArchitect.BuildMethod.instant;
+        public TextArchitect.BuildMethod bm = TextArchitect.BuildMethod.fade;
 
         string[] lines = new string[6]
         {

@@ -1,7 +1,7 @@
-Blanca "Hi, it's me."
+Blanca "Hi, it's me." list(items -f long), playSong("Intro Song" -v 1)
 
-Jeffry "Hi."
+setScene("Classroom" -s 5.5)
 
-Blanca "What's wrong?"
+World "hiya, \"Quote Here\" right backatcha!"
 
-Narrator "And the water was still."
+narrator "And so it ended where it had begun." PlaySong(End, -p 0.5), list(players), saveGame(1 -g all -f simple)

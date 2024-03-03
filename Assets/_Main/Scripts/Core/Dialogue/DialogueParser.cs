@@ -15,6 +15,8 @@ namespace DIALOGUE
 
             (string speaker, string dialogue, string commands) = RipContent(rawLine);
 
+            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");
+
             return new DIALOGUE_LINE(speaker, dialogue, commands);
         }
 
@@ -49,7 +51,8 @@ namespace DIALOGUE
             {
                 commandStart = match.Index;
 
-                return ("", "", rawLine.Trim());
+                if (dialogueStart == -1 && dialogueEnd == -1)
+                    return ("", "", rawLine.Trim());
             }
             //if we are here then we either have dialogue or a multi word argument in a command. Figure out if this is dialogue. 
             if (dialogueStart != -1 && dialogueEnd != -1 && (commandStart == -1 || commandStart > dialogueEnd))
@@ -57,6 +60,8 @@ namespace DIALOGUE
                 //we know we have valid dialogue
                 speaker = rawLine.Substring(0, dialogueStart).Trim();
                 dialogue = rawLine.Substring(dialogueStart + 1, dialogueEnd - dialogueStart - 1).Replace("\\\"","\"");
+                if (commandStart != -1)
+                    commands = rawLine.Substring(commandStart).Trim();
             }
             else if (commandStart != -1 && dialogueStart > commandStart)
                 commands = rawLine;

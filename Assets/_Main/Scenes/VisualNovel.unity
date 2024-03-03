@@ -1569,7 +1569,7 @@ GameObject:
   - component: {fileID: 892061418}
   - component: {fileID: 892061419}
   m_Layer: 0
-  m_Name: Text_Architect_TESTING
+  m_Name: Text_Architect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69a4970a0c634549a93e723534f87a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bm: 0
+  bm: 2
 --- !u!1 &955971768
 GameObject:
   m_ObjectHideFlags: 0
