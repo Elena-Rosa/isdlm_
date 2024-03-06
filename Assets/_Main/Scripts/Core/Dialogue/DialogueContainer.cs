@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 namespace DIALOGUE
 {
@@ -7,7 +8,7 @@ namespace DIALOGUE
     public class DialogueContainer
     {
         public GameObject root;
-        public TextMeshProUGUI nameText;
+        public NameContainer nameContainer;
         public TextMeshProUGUI dialogueText;
 
     }
