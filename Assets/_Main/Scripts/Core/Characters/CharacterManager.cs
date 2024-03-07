@@ -13,5 +13,29 @@ namespace CHARACTERS
         {
             instance = this;
         }
+
+        public Character CreateCharacter(string characterName)
+        {
+            if (characters.ContainsKey(characterName.ToLower()))
+            {
+                Debug.LogWarning($"A Chacter called ' {characterName}' already exists. Did not create the character.");
+                return null;
+            }
+
+            CHARACTER_INFO info = GetCharacterInfo(characterName);
+
+            return null;
+
+        }
+        private Character_Info GetCharacterInfo(string characterName)
+        {
+            CHARACTER_INFO result = new CHARACTER_INFO();
+            result.name = characterName;
+        }
+        private class CHARACTER_INFO
+        {
+            public string name = "";
+            public CharacterConfigData config = null;
+        }
     }
 }
