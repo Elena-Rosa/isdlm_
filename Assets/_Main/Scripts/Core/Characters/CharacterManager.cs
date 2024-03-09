@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DIALOGUE;
 
 namespace CHARACTERS
 {
@@ -8,6 +9,8 @@ namespace CHARACTERS
     {
         public static CharacterManager instance { get; private set; }
         private Dictionary<string, Character> characters = new Dictionary<string, Character>();
+
+        private CharacterConfigSO config => DialogueSystem.instance.config.characterConfigurationAsset;
 
         private void Awake()
         {
@@ -23,15 +26,40 @@ namespace CHARACTERS
             }
 
             CHARACTER_INFO info = GetCharacterInfo(characterName);
+            Character character = CreateCharacterFromInfo(info);
 
-            return null;
+            return character;
 
         }
-        private Character_Info GetCharacterInfo(string characterName)
+        private CHARACTER_INFO GetCharacterInfo(string characterName)
         {
             CHARACTER_INFO result = new CHARACTER_INFO();
+
             result.name = characterName;
+
+            result.config = config.GetConfig(characterName);
+
+            return result;
         }
+        private Character CreateCharacterFromInfo(CHARACTER_INFO info)
+        {
+            CharacterConfigData config = info.config;
+
+            if (config.characterType == Character.CharacterType.Text)
+                return new Character_Text(info.name);
+            
+            if (config.characterType == Character.CharacterType.Sprite || config.characterType == Character.CharacterType.SpriteSheet)
+                return new Character_Sprite(info.name);
+
+            if (config.characterType == Character.CharacterType.Live2D)
+                return new Character_Live2D(info.name);
+
+            if (config.characterType == Character.CharacterType.Model3D)
+                return new Character_Model3D(info.name);
+
+            return null;
+        }
+
         private class CHARACTER_INFO
         {
             public string name = "";
