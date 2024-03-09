@@ -26,7 +26,10 @@ namespace CHARACTERS
             }
 
             CHARACTER_INFO info = GetCharacterInfo(characterName);
+
             Character character = CreateCharacterFromInfo(info);
+
+            characters.Add(characterName.ToLower(), character);
 
             return character;
 

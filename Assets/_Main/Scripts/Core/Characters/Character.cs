@@ -1,26 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DIALOGUE;
 
 namespace CHARACTERS
 {
-    public abstract class Character 
+    public abstract class Character
     {
         public string name = "";
+        public string displayName = "";
         public RectTransform root = null;
+
+        public DialogueSystem dialogueSystem => DialogueSystem.instance;
 
         public Character(string name)
         {
             this.name = name;
         }
+
+        public Coroutine Say(string dialogue) => Say(new List<string> { dialogue });
+
+        public Coroutine Say(List<string> dialogue)
+        {
+            dialogueSystem.ShowSpeakerName(name);
+           return Say(dialogue);
+        }
         public enum CharacterType
         {
             Text,
             Sprite,
-            SpriteShhet,
+            SpriteSheet,
             Live2D,
             Model3D
         }
-    
+
     }
 }
