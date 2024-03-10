@@ -2,23 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Enumeration;
 using UnityEngine;
+using COMMANDS;
 
-public class TestFiles : MonoBehaviour
+namespace TESTING
 {
-    [SerializeField] private TextAsset fileName;
-
-    void Start()
+    public class TestFiles : MonoBehaviour
     {
-        StartCoroutine(Run());
-    }
+        [SerializeField] private TextAsset fileName;
 
-    IEnumerator Run()
-    {
-        List<string> lines = FileManager.ReadTextAsset(fileName, false);
+        void Start()
+        {
+            StartCoroutine(Run());
+        }
 
-        foreach (string line in lines)
-            Debug.Log(line);
+        IEnumerator Run()
+        {
+            List<string> lines = FileManager.ReadTextAsset(fileName, false);
 
-        yield return null;
+            foreach (string line in lines)
+                Debug.Log(line);
+
+            yield return null;
+        }
     }
 }

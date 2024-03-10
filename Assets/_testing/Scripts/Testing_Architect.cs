@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
 using DIALOGUE;
+using COMMANDS;
 
 namespace TESTING
 {

@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DIALOGUE;
+using COMMANDS;
 
-public class TestDialogueFiles : MonoBehaviour
+namespace TESTING
 {
-    [SerializeField] private TextAsset fileToRead = null;
 
-    void Start()
+    public class TestDialogueFiles : MonoBehaviour
     {
-        StartConversation();
+        [SerializeField] private TextAsset fileToRead = null;
+
+        void Start()
+        {
+            StartConversation();
+        }
+
+        void StartConversation()
+        {
+            List<string> lines = FileManager.ReadTextAsset(fileToRead);
+
+            DialogueSystem.instance.Say(lines);
+        }
+
     }
-
-    void StartConversation()
-    {
-        List<string> lines = FileManager.ReadTextAsset(fileToRead);
-
-        DialogueSystem.instance.Say(lines);
-    }
-
 }

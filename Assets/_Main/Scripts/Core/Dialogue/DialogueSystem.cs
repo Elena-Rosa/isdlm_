@@ -10,6 +10,7 @@ namespace DIALOGUE
     {
         [SerializeField] private DialogueSystemConfigurationSO _config;
         public DialogueSystemConfigurationSO config => _config;
+
         public DialogueContainer dialogueContainer = new DialogueContainer();
         private ConversationManager conversationManager;
         private TextArchitect architect;
@@ -46,7 +47,23 @@ namespace DIALOGUE
         {
             onUserPrompt_Next?.Invoke();
         }
-        public void ApplySpeakerDataToDialogueContainer()
+
+        public void ApplySpeakerDataToDialogueContainer(string speakerName)
+        {
+            Character character = CharacterManager.instance.GetCharacter(speakerName);
+            CharacterConfigData config = character != null ? character.config : CharacterManager.instance.GetCharacterConfig(speakerName);
+
+            ApplySpeakerDataToDialogueContainer(config);
+        }
+
+        public void ApplySpeakerDataToDialogueContainer(CharacterConfigData config)
+        {
+            dialogueContainer.SetDialogueColor(config.dialogueColor);
+            dialogueContainer.SetDialogueFont(config.dialogueFont);
+            dialogueContainer.nameContainer.SetNameColor(config.nameColor);
+            dialogueContainer.nameContainer.SetnameFont(config.nameFont);
+        }
+
         public void ShowSpeakerName(string speakerName = "")
         {
             if (speakerName.ToLower() != "narrator")
